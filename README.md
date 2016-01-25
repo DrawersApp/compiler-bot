@@ -5,7 +5,7 @@ C++ echo bot built with gloox - [Gloox tutorial] (http://blog.knatten.org/2012/0
 
 `sudo apt-get install libgloox-dev`
 
-`g++ -o bot bot.cpp -lgloox -lpthread`
+`make`
 
 `./bot`
 
@@ -25,7 +25,7 @@ Download gloox tar from [link](http://camaya.net/download/gloox-1.0.14.tar.bz2)
 
 Clone this repo and run
 
-`g++ -o bot bot.cpp -lgloox -lpthread`
+`make`
 
 `./bot`
 
