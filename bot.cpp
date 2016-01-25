@@ -1,8 +1,11 @@
 #include "Bot.h"
 
 Bot::Bot() {
-    JID jid("harshit1@ejabberd.sandwitch.in");
-    client = new Client( jid, "tractor" );
+    // mailto: harshit.bangar@gmail.com for username and password
+    string username = "REPLACE_ME";
+    string password = "REPLACE_ME";
+    JID jid(username);
+    client = new Client( jid, password );
     connListener = new ConnListener();
     client->registerMessageHandler( this );
     client->registerConnectionListener(connListener);
@@ -12,6 +15,33 @@ Bot::Bot() {
 Bot::~Bot() {
     delete client;
     delete connListener;
+}
+
+ostream& operator<<(ostream& os, Message::MessageType type) {
+    switch (type) {
+        case Message::Chat:
+            os << "Chat";
+            break;
+        case Message::Error:
+            os << "Error";
+            break;
+        case Message::Groupchat:
+            os << "Groupchat";
+            break;
+        case Message::Headline:
+            os << "Headline";
+            break;
+        case Message::Normal:
+            os << "Normal";
+            break;
+        case Message::Invalid:
+            os << "Invalid";
+            break;
+        default:
+            os << "unknown type";
+            break;
+    }
+    return os;
 }
 
 ostream& operator<<(ostream& os, const Message& stanza) {

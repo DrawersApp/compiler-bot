@@ -17,4 +17,4 @@ main.o : main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 clean:
-	\rm *.o *~ bot
+	\rm *.o bot
