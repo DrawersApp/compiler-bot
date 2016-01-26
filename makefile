@@ -1,20 +1,36 @@
-OBJS = ConnListener.o Bot.o main.o
-CC = g++
-DEBUG = -g
-CFLAGS = -Wall -c $(DEBUG)
+TARGET   = echobot
+
+CC       = g++
+# compiling flags here
+CFLAGS   = -Wall -c $(DEBUG)
+LINKER   = g++ -o
+
+# linking flags here
 LFLAGS = -Wall -lgloox -lpthread $(DEBUG)
 
-bot : $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o bot
+# change these to set the proper directories where each files shoould be
+SRCDIR   = src
+OBJDIR   = obj
+BINDIR   = bin
 
-ConnListener.o : ConnListener.h ConnListener.cpp
-	$(CC) $(CFLAGS) ConnListener.cpp
+SOURCES  := $(wildcard $(SRCDIR)/*.cpp)
+INCLUDES := $(wildcard $(SRCDIR)/*.h)
 
-Bot.o : Bot.h Bot.cpp ConnListener.h
-	$(CC) $(CFLAGS) Bot.cpp
+OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+rm       = rm -f
 
-main.o : main.cpp
-	$(CC) $(CFLAGS) main.cpp
+$(BINDIR)/$(TARGET): $(OBJECTS)
+	@$(LINKER) $@ $(LFLAGS) $(OBJECTS)
+	@echo "Linking complete!"
+
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
+	@$(CC) $(CFLAGS) $< -o $@
+	@echo "Compiled "$<" successfully!"
 
 clean:
-	\rm *.o bot
+	@$(rm) $(OBJECTS)
+	@echo "Cleanup complete!"
+
+remove: clean
+	@$(rm) $(BINDIR)/$(TARGET)
+	@echo "Executable removed!"
