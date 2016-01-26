@@ -1,4 +1,4 @@
-#include "Bot.h"
+#include "bot.h"
 #include "jsonExtension.h"
 #include <gloox/disco.h>
 #include <ctime>
