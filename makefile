@@ -1,12 +1,12 @@
 TARGET   = echobot
-
-CC       = g++
+DEBUG    = -g
+CC       = g++ -std=c++0x
 # compiling flags here
 CFLAGS   = -Wall -c $(DEBUG)
-LINKER   = g++ -o
+LINKER   = g++ -std=c++0x -o
 
 # linking flags here
-LFLAGS = -Wall -lgloox -lpthread $(DEBUG)
+LFLAGS = -Wall $(DEBUG) -lgloox -lpthread
 
 # change these to set the proper directories where each files shoould be
 SRCDIR   = src
