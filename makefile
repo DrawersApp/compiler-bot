@@ -27,10 +27,26 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 	@$(CC) $(CFLAGS) $< -o $@
 	@echo "Compiled "$<" successfully!"
 
+MKDIR_P = mkdir -p
+
+all: directories  ${BINDIR}/${TARGET}
+
+.PHONY: directories
+directories:
+	${OBJ_DIR} ${BIN_DIR} 
+
+${OBJ_DIR}:
+	${MKDIR_P} ${OBJDIR}
+
+${BIN_DIR}:
+	${MKDIR_P} ${BINDIR}
+
+.PHONY: clean
 clean:
 	@$(rm) $(OBJECTS)
 	@echo "Cleanup complete!"
 
+.PHONY: remove
 remove: clean
 	@$(rm) $(BINDIR)/$(TARGET)
 	@echo "Executable removed!"

@@ -1,9 +1,10 @@
 #include "Bot.h"
+#include "jsonExtension.h"
 
 Bot::Bot() {
     // mailto: harshit.bangar@gmail.com for username and password
-    string username = "REPLACE_ME";
-    string password = "REPLACE_ME";
+    string username = "e0753a58-9919-4b91-9352-398f9fc67044@ejabberd.sandwitch.in";
+    string password = "car";
     JID jid(username);
     client = new Client( jid, password );
     connListener = new ConnListener();
@@ -54,5 +55,9 @@ ostream& operator<<(ostream& os, const Message& stanza) {
 void Bot::handleMessage( const Message& stanza, MessageSession* session ) {
     cout << "Received message: " << stanza << endl;
     Message msg(Message::Chat, stanza.from(), stanza.body() );
+
+    //{"timestamp":1453805268796,"subType":"TEXT"}
+    std::string json ("{\"timestamp\": 1453805268796, \"subType\": \"TEXT\"}");
+    msg.addExtension(new JsonExtension(json));
     client->send( msg );
 }
