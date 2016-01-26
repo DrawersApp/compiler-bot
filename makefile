@@ -30,9 +30,7 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 
 MKDIR_P = mkdir -p
 
-all: directories
-	@echo "making now $(BINDIR)/$(TARGET)"
-	@$(BINDIR)/$(TARGET)
+all: directories $(BINDIR)/$(TARGET)
 
 .PHONY: directories
 directories:OBJ_DIR BIN_DIR 
