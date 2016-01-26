@@ -20,6 +20,7 @@ OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 rm       = rm -f
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
+	@echo "making  $(BINDIR)/$(TARGET)"
 	@$(LINKER) $@ $(LFLAGS) $(OBJECTS)
 	@echo "Linking complete!"
 
@@ -29,16 +30,19 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 
 MKDIR_P = mkdir -p
 
-all: directories  ${BINDIR}/${TARGET}
+all: directories
+	@echo "making now $(BINDIR)/$(TARGET)"
+	@$(BINDIR)/$(TARGET)
 
 .PHONY: directories
-directories:
-	${OBJ_DIR} ${BIN_DIR} 
+directories:OBJ_DIR BIN_DIR 
 
-${OBJ_DIR}:
+OBJ_DIR:
+	@echo "created obj"
 	${MKDIR_P} ${OBJDIR}
 
-${BIN_DIR}:
+BIN_DIR:
+	@echo "created bin"
 	${MKDIR_P} ${BINDIR}
 
 .PHONY: clean
