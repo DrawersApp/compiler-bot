@@ -1,16 +1,24 @@
 #include "Bot.h"
 #include "jsonExtension.h"
+#include <gloox/disco.h>
+#include <ctime>
+#include <sstream>
+
+using namespace gloox;
 
 Bot::Bot() {
     // mailto: harshit.bangar@gmail.com for username and password
-    string username = "e0753a58-9919-4b91-9352-398f9fc67044@ejabberd.sandwitch.in";
-    string password = "car";
+    string username = "REPLACE_ME";
+    string password = "REPLACE_ME";
+
     JID jid(username);
     client = new Client( jid, password );
     connListener = new ConnListener();
     client->registerMessageHandler( this );
     client->registerConnectionListener(connListener);
     client->connect(true);
+
+    client->logInstance().registerLogHandler(LogLevelDebug, LogAreaAll, this);
 }
 
 Bot::~Bot() {
@@ -47,17 +55,24 @@ ostream& operator<<(ostream& os, Message::MessageType type) {
 
 ostream& operator<<(ostream& os, const Message& stanza) {
     os << "type:'" << stanza.subtype()
-       << "' from:'" << stanza.from().full()
-       << "' body:'" << stanza.body() << "'";
+        << "' from:'" << stanza.from().full()
+        << "' body:'" << stanza.body() << "'";
     return os;
 }
 
 void Bot::handleMessage( const Message& stanza, MessageSession* session ) {
-    cout << "Received message: " << stanza << endl;
-    Message msg(Message::Chat, stanza.from(), stanza.body() );
 
-    //{"timestamp":1453805268796,"subType":"TEXT"}
-    std::string json ("{\"timestamp\": 1453805268796, \"subType\": \"TEXT\"}");
-    msg.addExtension(new JsonExtension(json));
-    client->send( msg );
+    if (stanza.body().length()) {
+        cout << "Received message: " << stanza << endl;
+        Message msg(Message::Chat, stanza.from(), "Bot Says: " + stanza.body());
+
+        //{"timestamp":1453805268796,"subType":"TEXT"}
+        std::stringstream ss;
+        ss << std::time(nullptr);
+        std::string json("{\"timestamp\": " + ss.str() + ",\"subType\": \"TEXT\"}");
+
+        msg.addExtension(new JsonExtension(json));
+        msg.setID(ss.str());
+        client->send(msg);
+    }
 }

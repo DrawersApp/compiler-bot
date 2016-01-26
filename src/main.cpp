@@ -1,4 +1,4 @@
-#include "Bot.h"
+#include "bot.h"
 
 int main() {
     Bot b;

@@ -15,7 +15,7 @@ namespace gloox
         if (!tag) {
             return;
         }
-        m_json = tag->findAttribute( "json" );
+        m_json = tag->cdata( );
     }
 
     JsonExtension::~JsonExtension()
@@ -29,10 +29,9 @@ namespace gloox
     }
 
     Tag* JsonExtension::tag() const {
-        Tag* tag = new Tag( m_json, XMLNS, "urn:xmpp:json:0" );
-        if ( !m_json.empty() ) {
-            tag->addAttribute( "json", m_json );
-        }
+        Tag* tag = new Tag( "json");
+        tag->setXmlns("urn:xmpp:json:0");
+        tag->setCData(m_json);
         return tag;
     }
 }
