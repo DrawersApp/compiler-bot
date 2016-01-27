@@ -10,8 +10,8 @@ using namespace gloox;
 
 Bot::Bot() {
     // mailto: harshit.bangar@gmail.com for username and password
-    string username = "e0753a58-9919-4b91-9352-398f9fc67044@ejabberd.sandwitch.in";
-    string password = "car";
+    string username = "REPLACE_ME";
+    string password = "REPLACE_ME";
 
     JID jid(username);
     client = new Client( jid, password );
