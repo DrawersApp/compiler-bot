@@ -66,9 +66,9 @@ void Bot::handleMessage( const Message& stanza, MessageSession* session ) {
         cout << "Received message: " << stanza << endl;
         Message msg(Message::Chat, stanza.from(), "Bot Says: " + stanza.body());
 
-        //{"timestamp":1453805268796,"subType":"TEXT"}
         std::stringstream ss;
-        ss << std::time(nullptr);
+        // convert it to mills
+        ss << std::time(nullptr) * 1000;
         std::string json("{\"timestamp\": " + ss.str() + ",\"subType\": \"TEXT\"}");
 
         msg.addExtension(new JsonExtension(json));
