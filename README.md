@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/DrawersApp/echo-bot.svg?branch=master)](https://travis-ci.org/DrawersApp/echo-bot)
+
 # Cpp-Bot
 
 C++ echo bot built with gloox - [Gloox tutorial] (http://blog.knatten.org/2012/03/23/basic-gloox-tutorial/)
