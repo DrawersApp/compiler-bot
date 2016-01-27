@@ -1,6 +1,8 @@
 #include "bot.h"
 #include "jsonExtension.h"
 #include <gloox/disco.h>
+#include <gloox/client.h>
+#include <gloox/jid.h>
 #include <ctime>
 #include <sstream>
 
@@ -8,8 +10,8 @@ using namespace gloox;
 
 Bot::Bot() {
     // mailto: harshit.bangar@gmail.com for username and password
-    string username = "REPLACE_ME";
-    string password = "REPLACE_ME";
+    string username = "e0753a58-9919-4b91-9352-398f9fc67044@ejabberd.sandwitch.in";
+    string password = "car";
 
     JID jid(username);
     client = new Client( jid, password );
