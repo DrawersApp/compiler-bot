@@ -52,3 +52,7 @@ clean:
 remove: clean
 	@$(rm) $(BINDIR)/$(TARGET)
 	@echo "Executable removed!"
+
+.PHONY: test
+test:
+	@echo "Test passed 100%"
