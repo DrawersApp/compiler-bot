@@ -24,6 +24,7 @@ class Bot : public MessageHandler, LogHandler {
             cout << message.c_str() << endl;
         }
 
+    const char * processMessage(const string);
 };
 
 #endif

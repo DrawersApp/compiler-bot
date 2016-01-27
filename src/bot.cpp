@@ -6,12 +6,20 @@
 #include <ctime>
 #include <sstream>
 
+#include "../include/rapidjson/document.h"
+#include "../include/rapidjson/writer.h"
+#include "../include/rapidjson/stringbuffer.h"
+#include "builder.h"
+#include "compileTask.h"
+
 using namespace gloox;
+using namespace rapidjson;
+
 
 Bot::Bot() {
     // mailto: harshit.bangar@gmail.com for username and password
-    string username = "REPLACE_ME";
-    string password = "REPLACE_ME";
+    string username = "e0753a58-9919-4b91-9352-398f9fc67044@ejabberd.sandwitch.in";
+    string password = "car";
 
     JID jid(username);
     client = new Client( jid, password );
@@ -65,16 +73,34 @@ ostream& operator<<(ostream& os, const Message& stanza) {
 void Bot::handleMessage( const Message& stanza, MessageSession* session ) {
 
     if (stanza.body().length()) {
-        cout << "Received message: " << stanza << endl;
-        Message msg(Message::Chat, stanza.from(), "Bot Says: " + stanza.body());
+
+        Message msg(Message::Chat, stanza.from(), processMessage(stanza.body()));
 
         std::stringstream ss;
         // convert it to mills
         ss << std::time(nullptr) * 1000;
         std::string json("{\"timestamp\": " + ss.str() + ",\"subType\": \"TEXT\"}");
+        Document d;
+        d.Parse(json.c_str());
+        Value& s = d["timestamp"];
+
+        cout << s.GetDouble() << endl;
 
         msg.addExtension(new JsonExtension(json));
         msg.setID(ss.str());
         client->send(msg);
     }
+}
+
+
+const char * Bot::processMessage(const string incomingMessage) {
+
+    string task = "compile";
+    string file = "rawFiles/test.cpp";
+    string language = "CPP";
+    CompileOperation *compileTask = new CompileOperation(file, language);
+   // DrawersBotString botString = new DrawersBotString(new list<BotStringElement>(), nullptr);
+    Document *d = compileTask->execute();
+
+    return (const char *) new string();
 }

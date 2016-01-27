@@ -1,23 +1,28 @@
 TARGET   = echobot
 DEBUG    = -g
 CC       = g++ -std=c++0x
-# compiling flags here
-CFLAGS   = -Wall -c $(DEBUG)
-LINKER   = g++ -std=c++0x -o
 
 # linking flags here
-LFLAGS = -Wall $(DEBUG) -lgloox -lpthread
+LFLAGS = -Wall $(DEBUG) -lgloox -lpthread -lrestclient-cpp
 
 # change these to set the proper directories where each files shoould be
-SRCDIR   = src
-OBJDIR   = obj
-BINDIR   = bin
+SRCDIR     = src
+OBJDIR     = obj
+BINDIR     = bin
 
-SOURCES  := $(wildcard $(SRCDIR)/*.cpp)
-INCLUDES := $(wildcard $(SRCDIR)/*.h)
+# for external libraries
+INCLUDEDIR = include
 
-OBJECTS  := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
-rm       = rm -f
+INCEXT     = -I$(INCLUDEDIR)/rapidjson -I$(INCLUDEDIR)/restclient-cpp
+SOURCES   := $(wildcard $(SRCDIR)/*.cpp)
+INCLUDES  := $(wildcard $(SRCDIR)/*.h)
+
+OBJECTS   := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+rm         = rm -f
+
+# compiling flags here
+CFLAGS   = -Wall $(INCEXT) -c $(DEBUG)
+LINKER   = g++ -std=c++0x -o
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	@echo "making  $(BINDIR)/$(TARGET)"
