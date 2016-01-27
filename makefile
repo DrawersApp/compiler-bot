@@ -21,7 +21,7 @@ rm       = rm -f
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	@echo "making  $(BINDIR)/$(TARGET)"
-	@$(LINKER) $@ $(LFLAGS) $(OBJECTS)
+	@$(LINKER) $@ $(OBJECTS) $(LFLAGS)
 	@echo "Linking complete!"
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp

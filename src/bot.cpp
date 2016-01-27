@@ -1,6 +1,8 @@
 #include "bot.h"
 #include "jsonExtension.h"
 #include <gloox/disco.h>
+#include <gloox/client.h>
+#include <gloox/jid.h>
 #include <ctime>
 #include <sstream>
 
