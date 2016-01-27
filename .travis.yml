@@ -1,2 +1,5 @@
+before_install:
+  sudo apt-get install libgloox-dev
+
 install: make all
 language: cpp
