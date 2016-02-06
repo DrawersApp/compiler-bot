@@ -6,7 +6,7 @@
 
 #include <string>
 #include <iostream>
-#include <rapidjson/stringbuffer.h>
+#include "../include/rapidjson/stringbuffer.h"
 #include "compileTask.h"
 #include "cloudinary.h"
 #include <sstream>

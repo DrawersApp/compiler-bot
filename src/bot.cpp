@@ -100,7 +100,7 @@ const char * Bot::processMessage(const string incomingMessage) {
     string language = "CPP";
     CompileOperation *compileTask = new CompileOperation(file, language);
    // DrawersBotString botString = new DrawersBotString(new list<BotStringElement>(), nullptr);
-    Document *d = compileTask->execute();
+    compileTask->execute();
 
     return (const char *) new string();
 }

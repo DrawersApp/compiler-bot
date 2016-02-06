@@ -7,7 +7,7 @@
 
 #include <list>
 #include <string>
-#include <rapidjson/writer.h>
+#include "../include/rapidjson/writer.h"
 #include "BotStringType.h"
 
 using namespace std;

@@ -1,9 +1,9 @@
-TARGET   = echobot
+TARGET   = compiler_bot
 DEBUG    = -g
 CC       = g++ -std=c++0x
 
 # linking flags here
-LFLAGS = -Wall $(DEBUG) -lgloox -lpthread -lrestclient-cpp
+LFLAGS = -Wall $(DEBUG) -lgloox -lpthread -lrestclient-cpp -lcurl
 
 # change these to set the proper directories where each files shoould be
 SRCDIR     = src
