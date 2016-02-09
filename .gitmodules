@@ -1,0 +1,6 @@
+[submodule "lib/rapidjson"]
+	path = lib/rapidjson
+	url = https://github.com/miloyip/rapidjson.git
+[submodule "lib/restclient-cpp"]
+	path = lib/restclient-cpp
+	url = https://github.com/mrtazz/restclient-cpp.git
