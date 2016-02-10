@@ -24,7 +24,7 @@ Document *CompileOperation::execute() {
 
 
 
-    RestClient::response rsp = RestClient::post("http://api.hackerearth.com/code/run/", "text/plain", ss.str());
+    RestClient::Response rsp = RestClient::post("http://api.hackerearth.com/code/run/", "text/plain", ss.str());
 
     cout << rsp.body << endl;
     rspDoc->Parse(rsp.body.c_str());
